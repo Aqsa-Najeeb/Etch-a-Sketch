@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+	
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	</head>
+	
+	<style>
+	
+		body
+		{
+			display: flex;
+			flex-direction: column;
+			width: 100vw;
+			height: 100vh;
+			justify-content: center;
+			align-items: center;
+			margin: 0;
+		}
+		
+		.box
+		{
+			box-sizing: border-box;
+			border : 1px white solid;
+		}
+		
+		.container
+		{
+			display: flex;
+			flex-wrap: wrap;
+			width: 800px;
+			height: 800px;
+		}
+		
+		button
+		{
+			width: 200px;
+			height: 50px;
+			border-radius: 20px;
+			margin: 10px;
+			cursor: pointer;
+			font-family:  Arial, Helvetica, sans-serif;
+			font-size: 15px;
+			color: red;
+		}
+	
+	</style>
+	
+	<body bgcolor="black">
+	
+	<button>Update Size</button>
+	
+    <div class="container"></div>
+	
+	<script>
+		
+		let container = document.querySelector('.container');
+		let button = document.querySelector('button');
+		
+		function gen(num)
+		{
+			container.innerHTML = "";
+			
+			for(let i=1; i<=num*num; i++)
+			{
+				const box = document.createElement('div');
+				box.classList.add('box');
+				box.style.height = (570/num) + "px";
+				box.style.width = (570/num) + "px";
+				box.style.backgroundColor = "transparent";
+				container.appendChild(box);
+			}
+			
+			hoverEffect();
+		}
+		
+		
+		function hoverEffect()
+		{
+			const boxes = document.querySelectorAll('.box');
+			boxes.forEach(box => 
+			{
+				box.addEventListener("mouseover", () => 
+				{
+					if(box.style.backgroundColor != "transparent")
+					{
+						box.style.backgroundColor = "transparent";
+					}
+					else
+					{
+						const randomColor = Math.floor(Math.random() * 16777215).toString(16);
+						box.style.backgroundColor = "#" + randomColor;
+					}
+					
+				});
+			});
+		}
+		
+		button.addEventListener("click", () => 
+		{
+			container.innerHTML = "";
+			let num = 51;
+			
+			while((num < 0)||(num > 50))
+			{
+				num = Number(prompt("Enter a Number b/w 1 and 50"));
+			}
+			
+			gen(num);
+		});
+		
+		gen(16);
+	
+	</script>
+	
+	</body>
+	
+</html>
